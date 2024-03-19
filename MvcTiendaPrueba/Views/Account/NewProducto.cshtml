@@ -1,0 +1,77 @@
+﻿@{
+    var categorias = ViewData["CATEGORIAS"] as List<Categoria>;
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/misestilos.css" asp-append-version="true" />
+    <!-- Font Awesome Icon Library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        /* Estilos personalizados aquí */
+        body {
+            padding-top: 100px; /* Ajustar según la altura de la barra de navegación */
+            background-color: #92bf924a;
+            margin-top: 0;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        .main-container {
+            min-height: calc(100% - 56px); /* Resta la altura de la barra de navegación */
+            display: flex;
+            flex-direction: column;
+        }
+
+        footer {
+            margin-top: auto; /* Hace que el pie de página se pegue al final del contenedor */
+        }
+
+        .formulario {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #6f9565d1;
+            border-radius: 20px;
+            padding-top: 30px;
+        }
+    </style>
+</head>
+<body style="margin-top: 60px;margin-bottom: 20px">
+    <a asp-controller="Account" asp-action="PanelAdmin">
+        <span class="material-symbols-outlined" style="color: black; border: 1px solid black; border-radius: 20px;">
+            arrow_back
+        </span>
+    </a>
+    <div class="formulario">
+        <h2>Registro de Productos</h2>
+
+        <form method="post" style="width:90%;margin: 2em;">
+            <div>
+                <input type="text" class="form-control" placeholder="Nombre del Producto" aria-label="Nombre del Producto" name="nombre"><br />
+                <input type="text" class="form-control" placeholder="Descripción" aria-label="Descripción" name="descripcion"><br />
+                <input type="number" step="1" class="form-control" placeholder="Precio" aria-label="Precio" name="precio"><br />
+                <div>
+                    <label for="categoria">Seleccione categoría: </label>
+                    <select class="form-select" name="idcategoria" aria-label="Default select example">
+                        <option selected></option>
+                        @foreach (Categoria cat in categorias)
+                        {
+                            <option value="@cat.IdCategoria">@cat.Nombre</option>
+                        }
+                    </select><br />
+                </div>
+
+            </div>
+            <button class="btn" style="width:100%;background-color: #7c8995;">
+                Registrar Producto
+            </button>
+        </form>
+        <h1 style="color: blue">
+            @ViewData["MENSAJE"]
+        </h1>
+    </div>
+
+</body>
+
